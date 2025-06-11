@@ -6,6 +6,7 @@ import '../neumorphic_widgets.dart';
 import 'neumorphic_expansion_tile.dart';
 import 'neumorphic_listview.dart';
 import 'neumorphic_pageview.dart';
+import 'neumorphic_tab_bar.dart';
 
 class NeumorphicHomePage extends StatefulWidget {
   const NeumorphicHomePage({super.key});
@@ -164,6 +165,15 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
                     ListTile(title: Text("Option 3")),
                   ],
                 ),
+                NeumorphicTabBar(
+                  tabs: const ["Home", "Profile", "Settings"],
+                  tabViews: const [
+                    Center(child: Text("Home Content")),
+                    Center(child: Text("Profile Content")),
+                    Center(child: Text("Settings Content")),
+                  ],
+                ),
+
 
               ],
             ),
