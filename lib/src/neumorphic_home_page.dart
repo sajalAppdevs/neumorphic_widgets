@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:neumorphic_widgets/src/neumorphic_grid.dart';
 
 import '../neumorphic_widgets.dart';
+import 'neumorphic_drawer.dart';
 import 'neumorphic_expansion_tile.dart';
 import 'neumorphic_listview.dart';
 import 'neumorphic_pageview.dart';
@@ -28,6 +29,7 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
         preferredSize: const Size.fromHeight(80), // You can adjust height as needed
         child: NeumorphicAppBar(title: "Neumorphic UI"),
       ),
+      drawer: const NeumorphicDrawer(),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
