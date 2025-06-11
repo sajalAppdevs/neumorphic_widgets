@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:neumorphic_widgets/src/neumorphic_grid.dart';
 
 import '../neumorphic_widgets.dart';
+import 'neumoprhic_rail.dart';
 import 'neumorphic_drawer.dart';
 import 'neumorphic_expansion_tile.dart';
 import 'neumorphic_listview.dart';
 import 'neumorphic_pageview.dart';
 import 'neumorphic_tab_bar.dart';
-import 'neumorphic_bottom_navigation_bar.dart'; // ✅ Make sure this is created and imported
+import 'neumorphic_bottom_navigation_bar.dart';
+
 
 class NeumorphicHomePage extends StatefulWidget {
   const NeumorphicHomePage({super.key});
@@ -23,7 +25,13 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
   String selected = "A";
   final TextEditingController _controller = TextEditingController();
 
-  int _selectedIndex = 0; // ✅ Added
+  int _selectedIndex = 0;
+
+  final List<IconData> railIcons = [
+    Icons.home,
+    Icons.search,
+    Icons.settings,
+  ];
 
   Widget _buildHomeContent() {
     return SingleChildScrollView(
@@ -191,9 +199,36 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
         child: NeumorphicAppBar(title: "Neumorphic UI"),
       ),
       drawer: const NeumorphicDrawer(),
+      body: Row(
+        children: [
+          /// ✅ Add Neumorphic Rail here
+          NeumorphicRail(
+            selectedIndex: _selectedIndex,
+            onDestinationSelected: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            destinations: const [
+              NavigationRailDestination(
+                icon: Icon(Icons.home),
+                label: Text("Home"),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.search),
+                label: Text("Search"),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.person),
+                label: Text("Profile"),
+              ),
+            ],
+          ),
 
-      body: _buildBody(), // ✅ Dynamic body based on selected index
-
+          /// Expanded content area
+          Expanded(child: _buildBody()),
+        ],
+      ),
       bottomNavigationBar: NeumorphicBottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
