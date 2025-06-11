@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:neumorphic_widgets/src/neumorphic_grid.dart';
 
 import '../neumorphic_widgets.dart';
+import 'neumorphic_expansion_tile.dart';
 import 'neumorphic_listview.dart';
 import 'neumorphic_pageview.dart';
 
@@ -155,6 +156,15 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
                     "Logout",
                   ],
                 ),
+                NeumorphicExpansionTile(
+                  title: "More Options",
+                  children: const [
+                    ListTile(title: Text("Option 1")),
+                    ListTile(title: Text("Option 2")),
+                    ListTile(title: Text("Option 3")),
+                  ],
+                ),
+
               ],
             ),
           ),
