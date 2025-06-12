@@ -4,6 +4,7 @@ import 'package:neumorphic_widgets/src/neumorphic_grid.dart';
 
 import '../neumorphic_widgets.dart';
 import 'neumoprhic_rail.dart';
+import 'neumorphic_divider.dart';
 import 'neumorphic_drawer.dart';
 import 'neumorphic_expansion_tile.dart';
 import 'neumorphic_listview.dart';
@@ -59,6 +60,9 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
                 );
               },
             ),
+            NeumorphicDivider(),
+            SizedBox(height: 16),
+            Text("Below Divider"),
             const SizedBox(height: 20),
             NeumorphicContainer(
               child: const Padding(
