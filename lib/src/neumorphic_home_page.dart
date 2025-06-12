@@ -10,7 +10,7 @@ import 'neumorphic_listview.dart';
 import 'neumorphic_pageview.dart';
 import 'neumorphic_tab_bar.dart';
 import 'neumorphic_bottom_navigation_bar.dart';
-
+import 'neumorphic_stepper.dart'; // ✅ Import the stepper
 
 class NeumorphicHomePage extends StatefulWidget {
   const NeumorphicHomePage({super.key});
@@ -24,8 +24,8 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
   bool isChecked = false;
   String selected = "A";
   final TextEditingController _controller = TextEditingController();
-
   int _selectedIndex = 0;
+  int currentStep = 0; // ✅ Stepper control
 
   final List<IconData> railIcons = [
     Icons.home,
@@ -73,10 +73,7 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
             NeumorphicButton(
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text(
-                  "Tap Me",
-                  style: TextStyle(fontSize: 16),
-                ),
+                child: Text("Tap Me", style: TextStyle(fontSize: 16)),
               ),
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -133,7 +130,7 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
                 ),
               ],
             ),
-            const SizedBox(width: 20),
+            const SizedBox(height: 20),
             NeumorphicProgressBar(progress: 0.65),
             NeumorphicIconButton(
               icon: Icons.favorite,
@@ -172,6 +169,35 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
                 Center(child: Text("Settings Content")),
               ],
             ),
+
+            /// ✅ Neumorphic Stepper Integration
+            const SizedBox(height: 40),
+            NeumorphicStepper(
+              steps: 4,
+              currentStep: currentStep,
+              onStepTapped: (index) {
+                setState(() {
+                  currentStep = index;
+                });
+              },
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  if (currentStep < 3) currentStep++;
+                });
+              },
+              child: const Text("Next"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  if (currentStep > 0) currentStep--;
+                });
+              },
+              child: const Text("Previous"),
+            ),
           ],
         ),
       ),
@@ -201,7 +227,6 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
       drawer: const NeumorphicDrawer(),
       body: Row(
         children: [
-          /// ✅ Add Neumorphic Rail here
           NeumorphicRail(
             selectedIndex: _selectedIndex,
             onDestinationSelected: (index) {
@@ -224,8 +249,6 @@ class _NeumorphicHomePageState extends State<NeumorphicHomePage> {
               ),
             ],
           ),
-
-          /// Expanded content area
           Expanded(child: _buildBody()),
         ],
       ),
